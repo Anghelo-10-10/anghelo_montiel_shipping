@@ -50,3 +50,61 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 ```bash
 git clone https://github.com/tuusuario/nombre_apellido_shipflow.git
 cd nombre_apellido_shipflow
+
+2. Configurar la Base de Datos
+Levanta PostgreSQL usando Docker:
+
+bash
+Copiar
+docker-compose up -d
+Asegúrate de que el puerto 5432 no esté ocupado.
+
+3. Ejecutar la Aplicación
+bash
+Copiar
+./gradlew bootRun
+La API estará disponible en:
+📍 http://localhost:8080/shipping/api
+
+📋 API Endpoints
+📦 Gestión de Paquetes
+Crear Envío
+POST /shipping/api/packages
+
+json
+Copiar
+{
+  "type": "DOCUMENT",
+  "weight": 0.5,
+  "description": "Contrato de compraventa",
+  "cityFrom": "Quito",
+  "cityTo": "Guayaquil"
+}
+Listar Todos los Envíos
+GET /shipping/api/packages
+
+Consultar Envío por Tracking ID
+GET /shipping/api/packages/{trackingId}
+
+Consultar Historial del Envío
+GET /shipping/api/packages/{trackingId}/history
+
+Actualizar Estado del Envío
+PUT /shipping/api/packages/{trackingId}/status
+
+json
+Copiar
+{
+  "status": "IN_TRANSIT",
+  "comment": "Paquete recogido en oficina central"
+}
+📦 Notas Adicionales
+Asegúrate de revisar las reglas de validación de transición de estados antes de actualizar.
+
+El historial de cada envío se guarda automáticamente para auditoría.
+
+Se recomienda probar la API con Postman o Insomnia.
+
+👨‍💻 Autor
+Anghelo Montiel
+Proyecto académico - Arquitectura Empresarial
